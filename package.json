@@ -8,13 +8,13 @@
     "packages/*"
   ],
   "scripts": {
-    "format": "prettier . --write",
-    "format:check": "prettier . --check",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "format": "npx prettier . --write",
+    "format:check": "npx prettier . --check",
+    "lint": "npx eslint .",
+    "lint:fix": "npx eslint . --fix",
     "dev:playground-react": "npm run dev --workspace=playground-react",
-    "build:core": "npm run format packages/core && eslint packages/core && npm run build --workspace=@border-waves/core",
-    "build:playground-react": "npm run format packages/playground-react && eslint packages/playground-react && npm run build --workspace=playground-react"
+    "build:core": "npm run format packages/core && npx eslint packages/core && npm run build --workspace=@border-waves/core",
+    "build:playground-react": "npm run format packages/playground-react && npx eslint packages/playground-react && npm run build --workspace=playground-react"
   },
   "keywords": [],
   "author": "",
