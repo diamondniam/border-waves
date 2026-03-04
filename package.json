@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "dev:playground-react": "npm run dev --workspace=playground-react",
-    "build:core": "npm run build --workspace=@border-waves/core"
+    "build:core": "npm run format packages/core && npm run build --workspace=@border-waves/core",
+    "git:push": "npm run format && npm run lint && git push origin main"
   },
   "keywords": [],
   "author": "",

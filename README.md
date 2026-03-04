@@ -21,7 +21,6 @@ Bring smooth, animated, responsive wave borders to your web projects with full c
 - **Canvas-based**: smooth and lightweight rendering
 - Fully **typed** and ready for modern front-end frameworks
 
-
 ## 🔹 Installation
 
 ```bash
@@ -34,7 +33,6 @@ yarn add @border-waves/core
 # pnpm
 pnpm add @border-waves/core
 ```
-
 
 ## 🔹 Basic Usage (React)
 
@@ -58,14 +56,12 @@ export default function App() {
 }
 ```
 
-
 ## 🔹 Contributing
 
 - Fork the repository: GitHub
 - Install dependencies in core and playground workspaces
 - Build library: npm run build --workspace=@border-waves/core
 - Run playground to test changes: npm run dev --workspace=playground-react
-
 
 ## 🔹 License
 

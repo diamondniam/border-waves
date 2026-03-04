@@ -1,35 +1,93 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { MathUtils } from '@border-waves/core'
+import { useEffect, useState } from 'react'
+import { helpers } from '@border-waves/core'
+import { BorderWaves, Slider } from '@/components'
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [intensivity, setIntensivity] = useState(0)
+  const [waveAmplitude, setWaveAmplitude] = useState<{
+    min: number
+    max: number
+  }>({ min: 10, max: 20 })
+  const [gradientInterval, setGradientInterval] = useState(2)
+  const [waveSpawnInterval, setWaveSpawnInterval] = useState(1)
+
+  const maxSteps = 5
+
+  useEffect(() => {
+    const waveAmplitudeMin = {
+      min: 10,
+      max: 20,
+    }
+    const waveAmplitudeMax = {
+      min: 20,
+      max: 40,
+    }
+    const waveSpawnIntervalMin = 0.5
+    const waveSpawnIntervalMax = 1
+    const gradientIntervalMin = 1
+    const gradientIntervalMax = 2
+
+    setWaveAmplitude({
+      min: helpers.lerp(
+        waveAmplitudeMin.min,
+        waveAmplitudeMax.min,
+        intensivity / maxSteps,
+      ),
+      max: helpers.lerp(
+        waveAmplitudeMin.max,
+        waveAmplitudeMax.max,
+        intensivity / maxSteps,
+      ),
+    })
+    setWaveSpawnInterval(
+      helpers.lerp(waveSpawnIntervalMax, waveSpawnIntervalMin, intensivity / maxSteps),
+    )
+    setGradientInterval(
+      helpers.lerp(gradientIntervalMax, gradientIntervalMin, intensivity / maxSteps),
+    )
+  }, [intensivity])
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <div className="flex h-screen items-center justify-center gap-10 lg:p-10">
+      <div className="relative flex items-center justify-center sm:w-[300px] sm:h-[610px] overflow-hidden rounded-[60px] pointer-events-none select-none">
+        {/* <Image src="/iphone.png" alt="Iphone" fill className="absolute" /> */}
+        <img src="/iphone.png" alt="iPhone" className="absolute" />
+
+        <div className="relative flex items-center justify-center w-[295px] h-[600px] overflow-hidden rounded-[60px] [--webkit-mask-image:-webkit-radial-gradient(white,black)]">
+          <BorderWaves
+            blur="3px"
+            className="absolute"
+            width={270}
+            height={585}
+            radius={40}
+            pointsPerMaxEdge={60}
+            waveAmplitude={waveAmplitude}
+            waveLength={{ min: 20, max: 30 }}
+            waveSpawnInterval={waveSpawnInterval}
+            gradientInterval={gradientInterval}
+          />
+        </div>
+
+        <img src="/iphone-borders.png" alt="iPhone" className="absolute" />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-          math is {MathUtils.add(count, 2)}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+      <div className="flex flex-col items-center gap-5 max-sm:absolute max-sm:mb-30">
+        <Slider
+          value={intensivity}
+          onChange={setIntensivity}
+          className="w-[100px]"
+          max={maxSteps}
+          icon={<img src="/power.png" alt="power" height={15} width={15} />}
+        />
+
+        <img
+          src="/logo.png"
+          alt="Logo"
+          height={150}
+          width={150}
+          className="max-sm:hidden"
+        />
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+    </div>
   )
 }
-
-export default App
