@@ -34,11 +34,13 @@ yarn add @border-waves/core
 
 # pnpm
 pnpm add @border-waves/core
+```
 
 ---
 
 🔹 Basic Usage (React)
 
+```js
 import React from 'react'
 import { BorderWaves } from '@border-waves/core'
 
@@ -56,6 +58,7 @@ export default function App() {
     </div>
   )
 }
+```
 
 ---
 
