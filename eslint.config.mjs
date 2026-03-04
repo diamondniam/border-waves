@@ -29,10 +29,7 @@ export default [
     files: ['packages/playground-react/**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
-        project: [
-          './packages/playground-react/tsconfig.json',
-          './packages/playground-react/tsconfig.node.json',
-        ],
+        project: ['./packages/playground-react/tsconfig.eslint.json'],
       },
     },
     rules: {
