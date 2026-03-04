@@ -36,7 +36,7 @@ pnpm add @border-waves/core
 ```
 
 
-🔹 Basic Usage (React)
+## 🔹 Basic Usage (React)
 
 ```js
 import React from 'react'
