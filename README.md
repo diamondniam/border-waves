@@ -8,13 +8,12 @@ Bring smooth, animated, responsive wave borders to your web projects with full c
 ## 🔹 Features
 
 - Full control over waves:
-  - `amplitude` – height of the waves
+  - `waveAmplitude` – height of the waves
   - `wavelength` – length of individual waves
   - `spawnInterval` – how often new waves appear
-- Advanced options:
-  - `gradientInterval`
-  - `pointsPerEdge`
-  - `radius`
+- Methods: 
+  - `setCanvas`
+  - `destroy`
   - ...and more
 - Built with **TypeScript** for type safety
 - Optimized for **high performance and large-scale animations**
@@ -37,22 +36,44 @@ pnpm add @border-waves/core
 ## 🔹 Basic Usage (React)
 
 ```js
-import React from 'react'
-import { BorderWaves } from '@border-waves/core'
+import Canvas from '@border-waves/core'
 
 export default function App() {
-  return (
-    <div style={{ width: 400, height: 400 }}>
-      <BorderWaves
-        amplitude={waveAmplitude}
-        wavelength={waveLength}
-        spawnInterval={waveSpawnInterval}
-        gradientInterval={gradientInterval}
-        pointsPerEdge={pointsPerEdge}
-        radius={radius}
-      />
-    </div>
-  )
+  const canvasRef = useRef<Canvas>(null)
+  const canvasElRef = useRef<HTMLCanvasElement>(null)
+
+  // INITIATING
+  useEffect(() => {
+    if (!canvasElRef.current) return
+
+    canvasRef.current = new Canvas({
+      el: canvasElRef.current,
+      // here can be your initial options: 
+      // blur, waveSpawnInterval and etc.
+    })
+  }, [])
+
+  // SETTING CANVAS OPTIONS
+  useEffect(() => {
+    if (!canvasRef.current) return
+
+    canvasRef.current.setCanvas({
+      blur,
+      waveSpawnInterval,
+      waveLength,
+      waveAmplitude,
+      waveDuration,
+      gradientInterval,
+      lineWidth,
+      radius,
+      pointsPerMaxEdge,
+      width,
+      height,
+      setCanvasTimeoutDuration,
+    })
+  }, []) // here can be your triggers
+
+  return <canvas ref={canvasElRef}></canvas>
 }
 ```
 
@@ -65,4 +86,4 @@ export default function App() {
 
 ## 🔹 License
 
-MIT © 2026 Diamond Niam
+ISC © 2026 Diamond Niam
